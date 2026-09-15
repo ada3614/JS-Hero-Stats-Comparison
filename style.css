@@ -275,19 +275,36 @@ button:hover {
 
 .stat-item {
   display: flex;
-  /* width: 80%; */
+  /* width: 100%; */
   align-items: center;
   justify-content: space-between;
   /* background-color: rgba(250, 250, 250, 0.8); */
+  /* background: var(--main-color);
+  background: linear-gradient(
+    120deg,
+    var(--main-color) 80%,
+    var(--cobalt) 100%
+  ); */
+  padding: 10px;
+  border-bottom: 1px solid #ffffff;
+}
+
+.strongerRight {
   background: var(--main-color);
   background: linear-gradient(
     120deg,
     var(--main-color) 80%,
     var(--cobalt) 100%
   );
-  padding: 10px;
-  border-bottom: 1px solid #ffffff;
 }
+.strongerLeft {
+  background: var(--main-color);
+  background: linear-gradient(60deg, var(--cobalt) 0%, var(--main-color) 20%);
+}
+
+/* .stat-item:last-child {
+  border-bottom: none;
+} */
 
 .stats-hero-info {
   display: flex;
@@ -298,6 +315,11 @@ button:hover {
 .stat-value {
   font-size: 44px;
   font-weight: 600;
+  width: 70px;
+}
+
+.stat-value:last-child {
+  text-align: right;
 }
 
 .stat-desc {

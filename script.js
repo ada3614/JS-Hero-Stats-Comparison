@@ -29,6 +29,11 @@ const versusBtns = document.querySelector(".versus-btn-wrapper");
 const clickedHeroOne = document.querySelector(".clicked-hero-1");
 const clickedHeroTwo = document.querySelector(".clicked-hero-2");
 const resetBtn = document.querySelector(".resetBtn");
+const showHeroesBtn = document.querySelector(".showHeroes");
+
+// COMPARISON SCREEN
+
+const comparisonSection = document.querySelector(".hero-stats");
 
 const getHeroList = () => {
   searchedHeroesContainer.innerHTML = "";
@@ -96,6 +101,7 @@ async function getClickedHeroData(gameID) {
 // get 2 clicked heroes
 let id = 0;
 let heroesList = [];
+
 function getHeroes(heroData) {
   heroesList.push({ id, heroData });
   clickedHeroOne.textContent = `${heroesList[0].heroData.name}`;
@@ -104,8 +110,8 @@ function getHeroes(heroData) {
     clickedHeroTwo.textContent = `${heroesList[1].heroData.name}`;
     versusBtns.style.display = "flex";
   }
-  console.log(heroesList);
-
+  // console.log(heroesList);
+  renderComparisonScreen(heroesList);
   // if ((id = 1)) {
   //   clickedHeroTwo.textContent = `${heroesList[1].heroData.name}`;
   // } else return;
@@ -115,6 +121,92 @@ function getHeroes(heroData) {
   //   console.log("stop");
   //   versusBtn.style.display = "block";
   // }
+}
+
+function renderComparisonScreen(heroesList) {
+  console.log("click");
+  // console.log(heroesList[0]);
+
+  const comparisonHtml = `
+  <div class="stats-contianer">
+          <div class="stats-hero-header">
+            <div class="stats-hero-info">
+              <h1 class="stats-hero-name">${heroesList[0].heroData.name}</h1>
+              <div class="stats-hero-details">
+                <h1 class="stats-hero-fullName stats-hero-detail-item">
+                  ${heroesList[0].heroData.biography.fullName}
+                </h1>
+                <div class="separator">/</div>
+                <h1 class="stats-hero-height stats-hero-detail-item">${heroesList[0].heroData.appearance.height[1]}</h1>
+                <div class="separator">/</div>
+                <h1 class="stats-hero-weight stats-hero-detail-item">${heroesList[0].heroData.appearance.weight[1]}</h1>
+              </div>
+            </div>
+            <img
+              src=${heroesList[0].heroData.images.md}
+              alt=""
+            />
+          </div>
+          <div class="stats">
+            <div class="stat-item strongerLeft">
+              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.combat}</div>
+              <div class="stat-desc">combat</div>
+              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.combat}</div>
+            </div>
+            <div class="stat-item strongerLeft">
+              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.durability}</div>
+              <div class="stat-desc">durability</div>
+              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.durability}</div>
+            </div>
+            <div class="stat-item strongerRight">
+              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.intelligence}</div>
+              <div class="stat-desc">intelligence</div>
+              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.intelligence}</div>
+            </div>
+            <div class="stat-item strongerRight">
+              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.power}</div>
+              <div class="stat-desc">power</div>
+              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.power}</div>
+            </div>
+            <div class="stat-item strongerRight">
+              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.speed}</div>
+              <div class="stat-desc">speed</div>
+              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.speed}</div>
+            </div>
+            <div class="stat-item strongerRight">
+              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.strength}</div>
+              <div class="stat-desc">strength</div>
+              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.strength}</div>
+            </div>
+          </div>
+          <div class="stats-hero-header">
+            <div class="stats-hero-info">
+              <h1 class="stats-hero-name">${heroesList[1].heroData.name}</h1>
+              <div class="stats-hero-details">
+                <h1 class="stats-hero-fullName stats-hero-detail-item">${heroesList[1].heroData.biography.fullName}
+                </h1>
+                <div class="separator">/</div>
+                <h1 class="stats-hero-height stats-hero-detail-item">${heroesList[1].heroData.appearance.height[1]}</h1>
+                <div class="separator">/</div>
+                <h1 class="stats-hero-weight stats-hero-detail-item">${heroesList[1].heroData.appearance.weight[1]}</h1>
+              </div>
+            </div>
+            <img
+              src=${heroesList[1].heroData.images.md}
+              alt=""
+            />
+          </div>
+        </div>
+  `;
+  comparisonSection.insertAdjacentHTML("beforeend", comparisonHtml);
+  versusSection.style.display = "none";
+  searchedHeroesContainer.style.display = "none";
+  // detailSectionContainer.style.display = "flex";
+}
+
+function renderStatsBg() {
+  const statItems = document.querySelectorAll(".stat-item");
+  const statValue = document.querySelectorAll(".stat-item stat-value");
 }
 
 function renderHeroData(heroData) {
@@ -207,3 +299,5 @@ searchedHeroesContainer.addEventListener("click", (event) => {
 });
 
 resetBtn.addEventListener("click", resetSelection);
+
+showHeroesBtn.addEventListener("click", renderComparisonScreen(heroesList));
