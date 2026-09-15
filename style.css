@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: "Genos", sans-serif;
+  font-family: var(--main-font);
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -16,6 +16,7 @@ body {
 }
 
 :root {
+  --main-font: "Genos", sans-serif;
   --main-color: rgb(15, 16, 19);
   --magenta: #db1b6d;
   --cobalt: #2b50f6;
@@ -56,11 +57,34 @@ header {
   width: 320px;
   height: 480px;
 }
+
+/* BUTTON */
 button {
   width: 240px;
   height: 54px;
   border-radius: 8px;
   border: none;
+  cursor: pointer;
+  font-family: var(--main-font);
+  font-size: 18px;
+  color: var(--white-color);
+  transition: all 0.5s ease;
+}
+
+button:hover {
+  opacity: 80%;
+  /* border: 2px solid var(--cobalt); */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main {
+  border: 1px solid var(--cobalt);
+  background-color: var(--cobalt);
+}
+
+.resetBtn {
+  border: 1px solid var(--cobalt);
+  background-color: transparent;
 }
 
 .input-container {
@@ -96,6 +120,10 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.selected {
+  opacity: 50%;
 }
 
 .search-item:hover {
@@ -170,6 +198,39 @@ button {
   font-weight: 800;
 }
 
+/* SHOW CLICKED HEROES VERSUS */
+
+.versus-info {
+  display: none;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+.versus-main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  font-size: 60px;
+}
+
+.versus-btn-wrapper {
+  display: none;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+.clicked-hero {
+  font-weight: 800;
+}
+
+/* .versus-btn {
+  display: none;
+} */
+
 /* HEROES STATS */
 
 /* .hero-stats {
@@ -208,7 +269,7 @@ button {
   flex-direction: column;
   justify-content: space-evenly;
   width: 100%;
-  gap: 24px;
+  /* gap: 24px; */
   /* margin: auto; */
 }
 
@@ -222,9 +283,10 @@ button {
   background: linear-gradient(
     120deg,
     var(--main-color) 80%,
-    var(--yellow) 100%
+    var(--cobalt) 100%
   );
   padding: 10px;
+  border-bottom: 1px solid #ffffff;
 }
 
 .stats-hero-info {
@@ -234,10 +296,13 @@ button {
 }
 
 .stat-value {
-  font-size: 32px;
+  font-size: 44px;
   font-weight: 600;
 }
 
+.stat-desc {
+  font-size: 20px;
+}
 .stats-hero-details {
   display: flex;
   align-items: center;

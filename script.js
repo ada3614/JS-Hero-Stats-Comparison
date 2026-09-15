@@ -22,6 +22,14 @@ const detailHeroStatsStrength = document.querySelector(
   ".powerstats-value .strength",
 );
 
+// versus screen
+
+const versusSection = document.querySelector(".versus-info");
+const versusBtns = document.querySelector(".versus-btn-wrapper");
+const clickedHeroOne = document.querySelector(".clicked-hero-1");
+const clickedHeroTwo = document.querySelector(".clicked-hero-2");
+const resetBtn = document.querySelector(".resetBtn");
+
 const getHeroList = () => {
   searchedHeroesContainer.innerHTML = "";
   fetch("https://akabab.github.io/superhero-api/api/all.json")
@@ -66,6 +74,12 @@ function updateSearchedHeroes(heroData) {
   console.log(heroData);
 }
 
+// mark clicked hero
+
+function selectedHeroItem(searchedItem) {
+  searchedItem.classList.add("selected");
+}
+
 // get cliced hero data
 
 async function getClickedHeroData(gameID) {
@@ -75,7 +89,32 @@ async function getClickedHeroData(gameID) {
   );
   const data = await response.json();
   console.log(data);
-  renderHeroData(data);
+  // renderHeroData(data);
+  getHeroes(data);
+}
+
+// get 2 clicked heroes
+let id = 0;
+let heroesList = [];
+function getHeroes(heroData) {
+  heroesList.push({ id, heroData });
+  clickedHeroOne.textContent = `${heroesList[0].heroData.name}`;
+  id++;
+  if (heroesList.length > 1) {
+    clickedHeroTwo.textContent = `${heroesList[1].heroData.name}`;
+    versusBtns.style.display = "flex";
+  }
+  console.log(heroesList);
+
+  // if ((id = 1)) {
+  //   clickedHeroTwo.textContent = `${heroesList[1].heroData.name}`;
+  // } else return;
+  // id++;
+  // clickedHeroOne.textContent = `${heroesList[0].heroData.name}`;
+  // if (heroesList.length > 2) {
+  //   console.log("stop");
+  //   versusBtn.style.display = "block";
+  // }
 }
 
 function renderHeroData(heroData) {
@@ -137,11 +176,25 @@ function renderHeroData(heroData) {
   detailSectionContainer.style.display = "flex";
 }
 
+function resetSelection() {
+  id = 0;
+  heroesList = [];
+  clickedHeroOne.textContent = "";
+  clickedHeroTwo.textContent = "";
+  const searchedItems = [...document.querySelectorAll(".search-item")];
+  searchedItems.forEach((item) => {
+    item.classList.remove("selected");
+  });
+  console.log(searchedItems);
+  versusSection.style.display = "none";
+}
+
 // EVENT LISTENERS
 
 searchName.addEventListener("keydown", (event) => {
   if (event.key == "Enter") {
     getHeroList();
+    // versusSection.style.display = "flex";
   }
 });
 
@@ -149,4 +202,8 @@ searchedHeroesContainer.addEventListener("click", (event) => {
   const searchItem = event.target.closest(".search-item");
   const searchItemId = searchItem.dataset.id;
   getClickedHeroData(searchItemId);
+  selectedHeroItem(searchItem);
+  versusSection.style.display = "flex";
 });
+
+resetBtn.addEventListener("click", resetSelection);
