@@ -34,6 +34,7 @@ const showHeroesBtn = document.querySelector(".showHeroes");
 // COMPARISON SCREEN
 
 const comparisonSection = document.querySelector(".hero-stats");
+const compResetStats = document.querySelector(".compResetStats");
 
 const getHeroList = () => {
   searchedHeroesContainer.innerHTML = "";
@@ -127,6 +128,37 @@ function renderComparisonScreen(heroesList) {
   console.log("click");
   // console.log(heroesList[0]);
 
+  const stats = [
+    "combat",
+    "durability",
+    "intelligence",
+    "power",
+    "speed",
+    "strength",
+  ];
+
+  const statsHtml = stats
+    .map((stat) => {
+      const hero1Value = heroesList[0].heroData.powerstats[stat];
+      const hero2Value = heroesList[1].heroData.powerstats[stat];
+
+      const strongerClass = getStrongerClass(hero1Value, hero2Value);
+
+      return `
+    <div class="stat-item ${strongerClass}">
+              <div class="hero-1-stat stat-value">${hero1Value}</div>
+              <div class="stat-desc">${stat}</div>
+              <div class="hero-2-stat stat-value">${hero2Value}</div>
+            </div>
+    `;
+    })
+    .join("");
+
+  // const combat1 = heroesList[0].heroData.powerstats.combat;
+  // const combat2 = heroesList[1].heroData.powerstats.combat;
+
+  // const combatClass = getStrongerClass(combat1, combat2);
+
   const comparisonHtml = `
   <div class="stats-contianer">
           <div class="stats-hero-header">
@@ -148,36 +180,7 @@ function renderComparisonScreen(heroesList) {
             />
           </div>
           <div class="stats">
-            <div class="stat-item strongerLeft">
-              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.combat}</div>
-              <div class="stat-desc">combat</div>
-              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.combat}</div>
-            </div>
-            <div class="stat-item strongerLeft">
-              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.durability}</div>
-              <div class="stat-desc">durability</div>
-              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.durability}</div>
-            </div>
-            <div class="stat-item strongerRight">
-              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.intelligence}</div>
-              <div class="stat-desc">intelligence</div>
-              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.intelligence}</div>
-            </div>
-            <div class="stat-item strongerRight">
-              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.power}</div>
-              <div class="stat-desc">power</div>
-              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.power}</div>
-            </div>
-            <div class="stat-item strongerRight">
-              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.speed}</div>
-              <div class="stat-desc">speed</div>
-              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.speed}</div>
-            </div>
-            <div class="stat-item strongerRight">
-              <div class="hero-1-stat stat-value">${heroesList[0].heroData.powerstats.strength}</div>
-              <div class="stat-desc">strength</div>
-              <div class="hero-2-stat stat-value">${heroesList[1].heroData.powerstats.strength}</div>
-            </div>
+       ${statsHtml}
           </div>
           <div class="stats-hero-header">
             <div class="stats-hero-info">
@@ -201,12 +204,20 @@ function renderComparisonScreen(heroesList) {
   comparisonSection.insertAdjacentHTML("beforeend", comparisonHtml);
   versusSection.style.display = "none";
   searchedHeroesContainer.style.display = "none";
+  compResetStats.style.display = "flex";
   // detailSectionContainer.style.display = "flex";
 }
 
-function renderStatsBg() {
-  const statItems = document.querySelectorAll(".stat-item");
-  const statValue = document.querySelectorAll(".stat-item stat-value");
+function getStrongerClass(value1, value2) {
+  if (value1 > value2) {
+    return "strongerLeft";
+  }
+
+  if (value2 > value1) {
+    return "strongerRight";
+  }
+
+  return "";
 }
 
 function renderHeroData(heroData) {

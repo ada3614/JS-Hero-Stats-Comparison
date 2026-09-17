@@ -237,7 +237,17 @@ button:hover {
   margin: auto;
   width: 100%;
 } */
+.hero-stats {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
 
+.compResetStats {
+  display: none;
+}
 .stats-contianer {
   margin: auto;
   display: flex;
@@ -328,12 +338,17 @@ button:hover {
 .stats-hero-details {
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
+  gap: 8px;
 }
 
 .stats-hero-detail-item {
+  text-wrap: nowrap;
   font-size: 24px;
   font-weight: 300;
+  /* width: 100%; */
+  line-height: 0.8;
+  text-align: center;
 }
 
 .stats-hero-name {
