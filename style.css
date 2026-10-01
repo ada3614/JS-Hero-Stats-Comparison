@@ -237,25 +237,36 @@ button:hover {
   margin: auto;
   width: 100%;
 } */
-.hero-stats {
+/* .hero-stats {
   display: flex;
   flex-direction: column;
+  width: 100%;
   margin: auto;
   align-items: center;
-  justify-content: center;
-}
+  justify-content: space-evenly;
+} */
 
 .compResetStats {
   display: none;
 }
-.stats-contianer {
-  margin: auto;
+
+.hero-stats {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* width: 100%; */
+  /* max-width: 1200px; */
+  align-items: center;
+}
+.stats-contianer {
+  /* margin: auto; */
+  display: flex;
+  /* justify-content: space-between; */
   align-items: end;
   gap: 24px;
-  max-width: 1200px;
-  /* width: 100%; */
+  /* max-width: 1200px; */
+  margin-bottom: 48px;
+  width: 100%;
 }
 
 .stats-hero-header {
@@ -270,7 +281,7 @@ button:hover {
 .stats-hero-header:last-child {
   /* background-color: #db1b6d; */
   /* color: var(--cobalt); */
-  align-items: end;
+  align-items: flex-end;
   text-align: right;
 }
 
@@ -319,7 +330,12 @@ button:hover {
 .stats-hero-info {
   display: flex;
   flex-direction: column;
+  /* align-items: flex-start; */
   margin-bottom: 24px;
+}
+
+.stats-hero-info:last-child {
+  align-items: flex-end;
 }
 
 .stat-value {
@@ -328,17 +344,13 @@ button:hover {
   width: 70px;
 }
 
-.stat-value:last-child {
-  text-align: right;
-}
-
 .stat-desc {
   font-size: 20px;
 }
 .stats-hero-details {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 8px;
 }
 
@@ -353,4 +365,6 @@ button:hover {
 
 .stats-hero-name {
   font-size: 54px;
+  line-height: 0.8;
+  margin-bottom: 12px;
 }

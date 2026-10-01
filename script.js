@@ -199,12 +199,13 @@ function renderComparisonScreen(heroesList) {
               alt=""
             />
           </div>
-        </div>
+                  </div>
+        
   `;
-  comparisonSection.insertAdjacentHTML("beforeend", comparisonHtml);
+  comparisonSection.insertAdjacentHTML("afterbegin", comparisonHtml);
   versusSection.style.display = "none";
   searchedHeroesContainer.style.display = "none";
-  compResetStats.style.display = "flex";
+  compResetStats.style.display = "block";
   // detailSectionContainer.style.display = "flex";
 }
 
