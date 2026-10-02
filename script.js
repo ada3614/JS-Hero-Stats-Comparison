@@ -29,6 +29,7 @@ const versusBtns = document.querySelector(".versus-btn-wrapper");
 const clickedHeroOne = document.querySelector(".clicked-hero-1");
 const clickedHeroTwo = document.querySelector(".clicked-hero-2");
 const resetBtn = document.querySelector(".resetBtn");
+const resetBtn2 = document.querySelector(".resetBtn2");
 const showHeroesBtn = document.querySelector(".showHeroes");
 
 // COMPARISON SCREEN
@@ -77,6 +78,7 @@ function updateSearchedHeroes(heroData) {
   `;
   searchedHeroesContainer.insertAdjacentHTML("beforeend", searchedHeroHtml);
   searchName.value = "";
+  searchedHeroesContainer.style.display = "flex";
   console.log(heroData);
 }
 
@@ -293,6 +295,21 @@ function resetSelection() {
   versusSection.style.display = "none";
 }
 
+function clearToMain() {
+  id = 0;
+  heroesList = [];
+  clickedHeroOne.textContent = "";
+  clickedHeroTwo.textContent = "";
+  const searchedItems = [...document.querySelectorAll(".search-item")];
+  searchedItems.forEach((item) => {
+    item.classList.remove("selected");
+  });
+  comparisonSection.innerHTML = "";
+  versusSection.style.display = "none";
+  searchedHeroesContainer.style.display = "none";
+  compResetStats.style.display = "none";
+}
+
 // EVENT LISTENERS
 
 searchName.addEventListener("keydown", (event) => {
@@ -311,5 +328,6 @@ searchedHeroesContainer.addEventListener("click", (event) => {
 });
 
 resetBtn.addEventListener("click", resetSelection);
+resetBtn2.addEventListener("click", clearToMain);
 
 showHeroesBtn.addEventListener("click", renderComparisonScreen(heroesList));

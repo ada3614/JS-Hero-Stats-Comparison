@@ -82,7 +82,8 @@ button:hover {
   background-color: var(--cobalt);
 }
 
-.resetBtn {
+.resetBtn,
+.resetBtn2 {
   border: 1px solid var(--cobalt);
   background-color: transparent;
 }
