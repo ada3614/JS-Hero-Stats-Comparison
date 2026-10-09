@@ -37,14 +37,18 @@ const showHeroesBtn = document.querySelector(".showHeroes");
 const comparisonSection = document.querySelector(".hero-stats");
 const compResetStats = document.querySelector(".compResetStats");
 
+const normalizeName = (name) => {
+  return name.toLowerCase().replace(/[\s-]/g, "");
+};
+
 const getHeroList = () => {
   searchedHeroesContainer.innerHTML = "";
   fetch("https://akabab.github.io/superhero-api/api/all.json")
     .then((response) => response.json())
     .then((data) => {
-      const heroName = searchName.value.toLowerCase();
+      const heroName = normalizeName(searchName.value);
       const heroes = data.filter((hero) =>
-        hero.name.toLowerCase().includes(heroName),
+        normalizeName(hero.name).includes(heroName),
       );
       console.log(heroes);
       heroes.forEach((hero) => {
